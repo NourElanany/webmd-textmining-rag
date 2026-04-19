@@ -57,6 +57,8 @@ class Generator:
                     print(f"[Generation] Rate limited, retrying in {wait}s...")
                     time.sleep(wait)
                     continue
+                if not response.ok:
+                    print(f"[Generation] HTTP {response.status_code}: {response.text}")
                 response.raise_for_status()
                 break
             else:
