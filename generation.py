@@ -31,7 +31,9 @@ class Generator:
             )
         return "\n".join(lines)
 
-    def generate(self, query: str) -> dict:
+    def generate(self, query: str, top_k: int = None) -> dict:
+        if top_k is not None:
+            self.augmentor.retriever.top_k = top_k
         aug    = self.augmentor.augment(query)
         prompt = aug["prompt"]
 
